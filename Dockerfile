@@ -49,6 +49,8 @@ COPY --from=build $PROJECT_DIR/dist $PROJECT_DIR/dist
 # EXPOSE port
 EXPOSE $APP_PORT
 
+RUN npm install -g cross-env ts-node typeorm
+
 # 容器启动时执行的命令，类似npm run start
 # CMD ["pnpm", "start:prod"]
 # CMD ["pm2-runtime", "ecosystem.config.js"]
