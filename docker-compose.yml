@@ -77,7 +77,6 @@
 #   nest_admin_net:
 #     name: nest_admin_net
 
-
 version: '3.8'
 
 services:
@@ -105,7 +104,7 @@ services:
       - ${DB_PORT:-3306}:3306
     command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci
     volumes:
-      - mysql_data:/var/lib/mysql
+      # - mysql_data:/var/lib/mysql
       - ./deploy/sql/:/docker-entrypoint-initdb.d/
     networks:
       - nest_admin_net
@@ -118,7 +117,7 @@ services:
       - ${REDIS_PORT:-6379}:6379
     command: redis-server --requirepass ${REDIS_PASSWORD}
     volumes:
-      - redis_data:/data
+    # - redis_data:/data
     networks:
       - nest_admin_net
 
@@ -135,17 +134,17 @@ services:
     ports:
       - ${APP_PORT:-7001}:${APP_PORT:-7001}
     volumes:
-      - logs_data:/app/logs/
+    # - logs_data:/app/logs/
     depends_on:
       - mysql
       - redis
     networks:
       - nest_admin_net
 
-volumes:
-  mysql_data:
-  redis_data:
-  logs_data:
+# volumes:
+#   mysql_data:
+#   redis_data:
+#   logs_data:
 
 networks:
   nest_admin_net:
